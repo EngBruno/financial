@@ -2,46 +2,46 @@ package br.com.javaforweb.financial.user;
 
 import java.util.List;
 
-public class UserDAOHibernate implements UserDAO {
+import org.hibernate.Query;
+import org.hibernate.Session;
 
-	public UserDAOHibernate() {
-		// TODO Auto-generated constructor stub
+public class UserDAOHibernate implements UserDAO {
+	private Session session;
+	public void setSessio(Session session){
+		this.session = session;
 	}
 
 	@Override
 	public void save(User user) {
-		// TODO Auto-generated method stub
-
+		this.session.save(user);
 	}
 
 	@Override
 	public void update(User user) {
-		// TODO Auto-generated method stub
-
+		this.session.update(user);
 	}
 
 	@Override
 	public void delete(User user) {
-		// TODO Auto-generated method stub
-
+		this.delete(user);
 	}
 
 	@Override
-	public void loanding(Integer code) {
-		// TODO Auto-generated method stub
-
+	public User loanding(Integer code) {
+		return (User)this.session.get(User.class, code);
 	}
 
 	@Override
-	public void searchByLogin(String login) {
-		// TODO Auto-generated method stub
-
+	public User searchByLogin(String login) {
+		String url= "select u from User u where u.login=:login";
+		Query queryOfLogin = this.session.createQuery(url);
+		queryOfLogin.setString("login", login);
+		return (User) queryOfLogin.uniqueResult();
 	}
 
 	@Override
 	public List<User> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.session.createCriteria(User.class).list();
 	}
 
 }
