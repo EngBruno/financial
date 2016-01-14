@@ -8,13 +8,14 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import br.com.javaforweb.financial.util.HibernateUtil;
-
+@WebFilter(urlPatterns = {"*.jsf"})
 public class ConnectionHibernateFilter implements Filter {
 
 	private SessionFactory sessionFactory;
