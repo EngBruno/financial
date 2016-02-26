@@ -1,5 +1,7 @@
 package br.com.javaforweb.web;
 
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -12,6 +14,7 @@ import br.com.javaforweb.financial.user.UserRN;
 public class UserBean {
 	private User user = new User();
 	private String confirmPassword;
+	private List<User> list;
 	
 	public String newUser(){
 		this.user = new User();
@@ -34,6 +37,11 @@ public class UserBean {
 		return "usersuccess";
 	}
 	
+	public void listUser(){
+		UserRN userRN = new UserRN();
+		this.list = userRN.list();
+	}
+	
 	public User getUser() {
 		return user;
 	}
@@ -46,4 +54,14 @@ public class UserBean {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+
+	public List<User> getList() {
+		UserRN userRN = new UserRN();
+		if(userRN.list() == null){
+			this.list = userRN.list(); 
+		}
+		return list;
+	}
+	
+	
 }
