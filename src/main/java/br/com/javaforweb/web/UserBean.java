@@ -8,15 +8,17 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.javaforweb.financial.user.User;
-import br.com.javaforweb.financial.user.UserRN;
+import br.com.javaforweb.financial.user.UserBC;
 @ManagedBean(name="userBean")
 @RequestScoped
 public class UserBean {
 	private User user = new User();
 	private String confirmPassword;
-	private List<User> list;
+	private List<User> listUser;
+	private String destinySave;
 	
 	public String newUser(){
+		this.destinySave = "usersuccess";
 		this.user = new User();
 		this.user.setActive(true);
 		return "/public/user";
@@ -32,14 +34,31 @@ public class UserBean {
 			return null;
 		}
 		
-		UserRN userRN = new UserRN();
+		UserBC userRN = new UserBC();
 		userRN.save(this.user);
-		return "usersuccess";
+		return this.destinySave;
 	}
 	
-	public void listUser(){
-		UserRN userRN = new UserRN();
-		this.list = userRN.list();
+	public String edit(){
+		this.confirmPassword = this.user.getPassword();
+		return "/public/user";
+	}
+	
+	public String delete(){
+		UserBC userBC= new UserBC();
+		userBC.delete(this.user);
+		this.listUser = null;
+		return null;
+	}
+	
+	public String activate(){
+		if(this.user.isActive()){
+			this.user.setActive(false);
+		}else{
+			this.user.setActive(true);
+		}
+		
+		return null;
 	}
 	
 	public User getUser() {
@@ -55,13 +74,26 @@ public class UserBean {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public List<User> getList() {
-		UserRN userRN = new UserRN();
-		if(userRN.list() == null){
-			this.list = userRN.list(); 
-		}
-		return list;
+	public void setListUser(List<User> list) {
+		this.listUser = list;
 	}
+	
+	public String getDestinySave() {
+		return destinySave;
+	}
+
+	public void setDestinySave(String destinySave) {
+		this.destinySave = destinySave;
+	}
+	
+	public List<User> getListUser() {
+		UserBC userBC = new UserBC();
+		if(userBC.list() != null){
+			this.listUser = userBC.list();
+		}
+		return this.listUser;
+	}
+	
 	
 	
 }

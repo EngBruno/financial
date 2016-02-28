@@ -8,5 +8,5 @@ public interface UserDAO {
 	public void delete(User user);
 	public User loanding(Integer code);
 	public User searchByLogin(String login);
-	public List<User> list();
+	public List<User> listUser();
 }
