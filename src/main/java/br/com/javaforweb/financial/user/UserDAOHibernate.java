@@ -23,7 +23,7 @@ public class UserDAOHibernate implements UserDAO {
 
 	@Override
 	public void delete(User user) {
-		this.delete(user);
+		this.session.delete(user);
 	}
 
 	@Override

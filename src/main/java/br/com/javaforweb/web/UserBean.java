@@ -47,7 +47,7 @@ public class UserBean {
 	public String delete(){
 		UserBC userBC= new UserBC();
 		userBC.delete(this.user);
-		this.listUser = null;
+//		this.listUser = null;
 		return null;
 	}
 	
@@ -58,6 +58,8 @@ public class UserBean {
 			this.user.setActive(true);
 		}
 		
+		UserBC userBC = new UserBC();
+		userBC.save(this.user);
 		return null;
 	}
 	
