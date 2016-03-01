@@ -4,9 +4,9 @@ import java.util.List;
 
 import br.com.javaforweb.financial.util.DAOFactory;
 
-public class UserRN {
+public class UserBC {
 	private UserDAO userDAO;
-	public UserRN() {
+	public UserBC() {
 		this.userDAO = DAOFactory.creatingUserDAO();
 	}
 	
@@ -28,6 +28,6 @@ public class UserRN {
 		this.userDAO.delete(user);
 	}
 	public List<User> list(){
-		return this.userDAO.list();
+		return this.userDAO.listUser();
 	}
 }

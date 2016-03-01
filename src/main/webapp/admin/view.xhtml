@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f ="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<title> View Admin </title>
+</h:head>
+<h:body>
+	<h1>Cadastro de usuarios</h1>
+	<h:form>
+		<h:messages/>
+		<h:dataTable value="#{userBean.listUser}"  var="user" rules="rows" cellpadding="5" >
+			<f:facet name="caption">
+				A lista a seguir exibe a relação de todos os usuarios do sistema. Você poderar realizar a ativação e desativação
+				, edição e exclusão para usuários.
+			</f:facet>
+			<f:facet name="header">Listagem de usuarios</f:facet>
+			<f:facet name="footer">Final da lista</f:facet>
+			
+			<h:column>
+				<h:commandLink action="#{userBean.activate}" >
+				<h:graphicImage library="images" name="usuario_ativo_#{user.active}.png"   style="border:0"/>
+				<f:setPropertyActionListener target="#{userBean.user}" value="#{user}" />
+				</h:commandLink>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Codigo</f:facet>
+				#{user.code}
+			</h:column>
+			
+			<!-- <h:column>
+				<h:graphicImage library="images" name="bandeira_#{user.language}.png"/>
+			</h:column> -->
+			
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				#{user.name}
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Email</f:facet>
+				<a href="mailto:#{user.email}" > #{user.email} </a>
+			</h:column>
+			
+			<h:column>
+				<h:commandLink action="#{userBean.edit}">
+				<h:graphicImage library="images"  name="editar16.png"  style="border:0"/>
+				<f:setPropertyActionListener target="#{userBean.user}" value="#{user}" />
+				<f:setPropertyActionListener target="#{userBean.destinySave}" value="/admin/view/"/>
+			</h:commandLink>
+			</h:column>
+			
+			<h:column>
+				<h:commandLink action="#{userBean.delete}"
+				onclick="if(!confirm('Confirmar a exclusao do usuario #{user.name}?' )) return false;">
+				<h:graphicImage library="images" name="excluir16.png" style="border:0"/>
+				<f:setPropertyActionListener target="#{userBean.user}" value="#{user}"/>
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>

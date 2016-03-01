@@ -23,7 +23,7 @@ public class UserDAOHibernate implements UserDAO {
 
 	@Override
 	public void delete(User user) {
-		this.delete(user);
+		this.session.delete(user);
 	}
 
 	@Override
@@ -39,8 +39,9 @@ public class UserDAOHibernate implements UserDAO {
 		return (User) queryOfLogin.uniqueResult();
 	}
 
-	@Override
-	public List<User> list() {
+	@SuppressWarnings("unchecked")
+	public List<User> listUser() {
+//		System.out.println(this.session.createCriteria(User.class).list().toString());
 		return this.session.createCriteria(User.class).list();
 	}
 
