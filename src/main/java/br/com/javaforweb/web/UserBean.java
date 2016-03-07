@@ -63,6 +63,17 @@ public class UserBean {
 		return null;
 	}
 	
+	public String toAssignPermission(User user,String permission){
+	this.user = user;
+	java.util.Set<String> permissions = this.user.getPermission();
+	if(permissions.contains(permission)){
+		permissions.remove(permission);
+	}else{
+		permissions.add(permission);
+	}
+	return null;
+	}
+	
 	public User getUser() {
 		return user;
 	}

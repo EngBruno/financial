@@ -2,10 +2,10 @@ package br.com.javaforweb.financial.user;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User implements Serializable{
@@ -21,6 +21,12 @@ public class User implements Serializable{
 	private String cellFone;
 	private String language;
 	private boolean active;
+	@ElementCollection(targetClass = String.class)
+	@JoinTable( name="user_permission", uniqueConstraints={@UniqueConstraint(columnNames={"user","permission"})}, 
+	joinColumns=@JoinColumn(name="user"))
+	@Column(name="permission",length=50)
+	private Set<String> permission=new HashSet<String>();
+	
 	public Integer getCode() {
 		return code;
 	}
@@ -75,6 +81,12 @@ public class User implements Serializable{
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	public Set<String> getPermission() {
+		return permission;
+	}
+	public void setPermission(Set<String> permission) {
+		this.permission = permission;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,6 +100,7 @@ public class User implements Serializable{
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((permission == null) ? 0 : permission.hashCode());
 		return result;
 	}
 	@Override
@@ -141,7 +154,13 @@ public class User implements Serializable{
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (permission == null) {
+			if (other.permission != null)
+				return false;
+		} else if (!permission.equals(other.permission))
+			return false;
 		return true;
 	}
+	
 	
 }

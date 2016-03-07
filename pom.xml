@@ -34,6 +34,10 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 			<name>jvnet-nexus-releases</name>
 			<url>https://maven.java.net/content/repositories/releases/</url>
 		</repository>
+		<repository>
+			<id>org.springframework.security.taglibs.facelets</id>
+			<url>http://spring-security-facelets-taglib.googlecode.com/svn/repo/</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<!-- Java Server Faces -->
@@ -81,6 +85,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.1.1</version>
+		</dependency>
+		<!-- Spring tag -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>facelets-taglib-jsf20-spring-3</artifactId>
+			<version>0.5</version>
 		</dependency>
 	</dependencies>
 </project>

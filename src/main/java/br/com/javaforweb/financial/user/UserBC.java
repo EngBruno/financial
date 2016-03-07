@@ -19,6 +19,7 @@ public class UserBC {
 	public void save(User user){
 		Integer code = user.getCode();
 		if(code==null || code==0){
+			user.getPermission().add("ROLE_USER");
 			this.userDAO.save(user);
 		}else{
 			this.userDAO.update(user);

@@ -18,6 +18,11 @@ public class UserDAOHibernate implements UserDAO {
 
 	@Override
 	public void update(User user) {
+		if(user.getPermission() ==null || user.getPermission().size()==0){
+			User userPermission = this.loanding(user.getCode());
+			user.setPermission(userPermission.getPermission());
+			this.session.evict(userPermission);
+		}
 		this.session.update(user);
 	}
 

@@ -43,6 +43,21 @@
 			</h:column>
 			
 			<h:column>
+				<f:facet name="header">Permissões</f:facet>
+				<h:commandLink action="#{userBean.toAssignPermission(user,'ROLE_ADMIN')}" 
+				title="Permissão administrador" >
+				<h:graphicImage library="images" name="ROLE_ADMINISTRADOR_#{user.permission.contains('ROLE_ADMIN')}.png" 
+				style="border:0"/>
+				</h:commandLink>
+				
+				<h:commandLink action="#{userBean.toAssignPermission(user,'ROLE_USER')}" 
+				title="Permissão Usuarios" >
+				<h:graphicImage library="images" name="ROLE_USUARIO_VIP_#{user.permission.contains('ROLE_USER')}.png" 
+				style="border:0"/>
+				</h:commandLink>
+			</h:column>
+			
+			<h:column>
 				<h:commandLink action="#{userBean.edit}">
 				<h:graphicImage library="images"  name="editar16.png"  style="border:0"/>
 				<f:setPropertyActionListener target="#{userBean.user}" value="#{user}" />

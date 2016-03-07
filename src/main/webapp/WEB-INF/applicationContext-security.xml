@@ -7,22 +7,22 @@
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 	<http auto-config="true"> 
-		<intercept-url pattern="/admin/**" access="ROLE_ADMINISTRADOR" /> 
-		<intercept-url pattern="/restrito/**" access="ROLE_USUARIO" />
-		<form-login login-page="/publico/login.jsf" 
+		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" /> 
+		<intercept-url pattern="/limited/**" access="ROLE_ADMIN" />
+		<form-login login-page="/public/login.jsf" 
 			always-use-default-target="true" 
-			default-target-url="/restrito/principal.jsf"
-			authentication-failure-url="/publico/login.jsf?login_error=1" />
+			default-target-url="/limited/main.jsf"
+			authentication-failure-url="/public/login.jsf?login_error=1" />
 		<logout/> 
 		<remember-me /> 
 	</http>
 	<authentication-manager>
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="financialDataSource" 
-				authorities-by-username-query="SELECT u.login, p.permissao 
+				authorities-by-username-query="SELECT u.login, p.permission
 																	FROM user u, user_permission p 
 																	WHERE u.code = p.user AND u.login = ?"
-				users-by-username-query="SELECT login, passworld, active FROM user WHERE login = ?" />
+				users-by-username-query="SELECT login, password, active FROM user WHERE login = ?" />
 		</authentication-provider>
 	</authentication-manager>
 </beans:beans>
