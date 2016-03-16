@@ -9,6 +9,7 @@
 		<property name="current_session_context_class">thread</property>
 		<property name="hibernate.hbm2ddl.auto">update</property> 
 		<mapping class="br.com.javaforweb.financial.user.User"/> 
+		<mapping class="br.com.javaforweb.financial.account.Account"/> 
 
 	</session-factory>
 </hibernate-configuration>
